@@ -1,15 +1,22 @@
 SRCDIR=src
 OBJDIR=objs
 
-SRCS=$(SRCDIR)/analyzer.cpp
-OBJS=$(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS))
+SRCS=\
+		 $(SRCDIR)/analyzer.cpp \
+		 $(SRCDIR)/predictor.cpp
 
-all: $(OBJS) analyzer
+OBJS=$(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS))
+TRG=$(patsubst $(SRCDIR)/%.cpp,%,$(SRCS))
+
+all: $(OBJS) analyzer predictor
 
 .PHONY: clean
 
-analyzer: $(OBJS)
-	$(CXX) -o $@ $^
+%: $(OBJDIR)/%.o $(OBJS)
+	$(CXX) -o $@ $<
+
+run: $(TRG)
+	./analyzer combine.out
 
 $(OBJS): | $(OBJDIR)
 $(OBJDIR):
@@ -19,4 +26,4 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CXX) -c -o $@ $<
 
 clean:
-	rm -rf $(OBJDIR) analyzer
+	rm -rf $(OBJDIR) $(TRG)
