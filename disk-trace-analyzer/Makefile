@@ -3,12 +3,13 @@ OBJDIR=objs
 
 SRCS=\
 		 $(SRCDIR)/analyzer.cpp \
-		 $(SRCDIR)/predictor.cpp
+		 $(SRCDIR)/predictor.cpp \
+		 $(SRCDIR)/predictor1.cpp
 
 OBJS=$(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS))
 TRG=$(patsubst $(SRCDIR)/%.cpp,%,$(SRCS))
 
-all: $(OBJS) analyzer predictor
+all: $(OBJS) $(TRG)
 
 .PHONY: clean
 
