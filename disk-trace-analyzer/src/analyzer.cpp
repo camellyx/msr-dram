@@ -52,12 +52,28 @@ int main(int argc, char* argv[]) {
   }
 
   // print
-  for (vector<RHistMeta>::iterator it=rHistory.begin(),end=rHistory.end(); it!=end; ++it) {
+  /*for (vector<RHistMeta>::iterator it=rHistory.begin(),end=rHistory.end(); it!=end; ++it) {
     printf("\n%llu:\n\t", it->b);
     for (int i=1; i<it->size; i++) {
       printf("%f ", history[it->b][i].t - history[it->b][i-1].t);
       if (i%10 == 0) printf("\n\t");
     }
+  }*/
+
+  // get distribution
+  unsigned long long dtDist[21];
+  for (int i=0; i<21; i++) dtDist[i] = 0;
+  for (vector<RHistMeta>::iterator it=rHistory.begin(),end=rHistory.end(); it!=end; ++it) {
+    for (int i=1; i<it->size; i++) {
+      int dt = history[it->b][i].t - history[it->b][i-1].t;
+      dt /= 10;
+      if (dt > 20) dt = 20;
+      dtDist[dt]++;
+    }
+  }
+  // print distribution
+  for (int i=0; i<21; i++) {
+    printf("%d %llu\n", i*10, dtDist[i]);
   }
 
   // print distribution
@@ -71,6 +87,7 @@ int main(int argc, char* argv[]) {
 }
 
 void parseTraceCello(FILE *fTrace, map<unsigned long long, VecHistMeta> &history) {
+  bool foundzero = false;
   // read trace
   while (!feof(fTrace)) {
     double t/*Time Stamp*/;
@@ -79,6 +96,13 @@ void parseTraceCello(FILE *fTrace, map<unsigned long long, VecHistMeta> &history
     unsigned long long b/*Start Block*/;
     char w/*Is Write*/;
     if ( fscanf(fTrace, "%lf %u %llu %d %c", &t, &d, &b, &s, &w) == 5 ) {
+      if (t < 0) continue;
+      if (t == 0) {
+        foundzero = true;
+        continue;
+      }
+      if (!foundzero) continue;
+      if (w != 'T') continue;
       while (s > 0) {
         map<unsigned long long, VecHistMeta>::iterator it = history.find(b);
         HistMeta newHist = {t};
