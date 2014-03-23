@@ -23,8 +23,7 @@ int main(int argc, char **argv) {
   while (parseTrace(fTrace, record)) {
     if (record.w != 'T') continue;
     //printRecord(record);
-    //if (record.t > 3600.0*24*day) {
-    if (record.t > 3600.0*day) { // faster debug
+    if (record.t > 3600.0*24*day) {
       logger.finishDay(day);
       day++;
     }

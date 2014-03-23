@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include <cstdio>
 #include <unistd.h>
 #include "parser.h"

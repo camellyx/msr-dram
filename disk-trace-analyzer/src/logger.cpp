@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cassert>
 #include "parser.h"
 #include "logger.h"
 using namespace std;

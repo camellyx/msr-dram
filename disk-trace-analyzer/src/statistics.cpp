@@ -18,7 +18,7 @@ void printDistribution(Distribution &dist) {
       count = it->second;
       it++;
     }
-    //if (count) printf("%d, %llu\n", i, count);
+    printf("%d, %llu\n", i, count);
   }
   // print write interval distribution
   printf("-----------------------------------------\n");
