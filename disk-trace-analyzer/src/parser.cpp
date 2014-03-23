@@ -15,4 +15,6 @@ int parseTraceCello(FILE *fTrace, TraceRecord &record) {
   return 0;
 }
 
-
+void printRecord(TraceRecord &record) {
+  printf("%lf %u %llu %d %c\n", record.t, record.d, record.b, record.s, record.w);
+}
