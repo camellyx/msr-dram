@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <cassert>
+#include <cmath>
 #include "parser.h"
 #include "logger.h"
 using namespace std;
@@ -13,9 +14,12 @@ void Logger::addToLog(TraceRecord &record) {
     log_it = log.find(b);
     if (log_it != log.end()) {
       // found
-      double interval = record.t - log_it->second.prev_t;
+      double interval = fabs(record.t - log_it->second.prev_t);
       log_it->second.prev_t = record.t;
       log_it->second.w_cnt++;
+#ifdef DEBUG
+      log_it->second.line_num = record.l;
+#endif
       // update write interval distribtuion
       int int_interval = (int)(interval/WRITE_INTERVAL_DIST_INTERVAL)*WRITE_INTERVAL_DIST_INTERVAL;
       addToDistInterval(int_interval);
@@ -24,6 +28,9 @@ void Logger::addToLog(TraceRecord &record) {
       PageLog newLog;
       newLog.prev_t = record.t;
       newLog.w_cnt = 1;
+#ifdef DEBUG
+      newLog.line_num = record.l;
+#endif
       log[b] = newLog;
     }
     s -= 1024;

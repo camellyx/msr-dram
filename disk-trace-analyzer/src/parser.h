@@ -7,6 +7,7 @@ struct TraceRecord {
         unsigned int d/*Device id*/;
                  int s/*Size*/;
   unsigned long long b/*Start Block*/;
+  unsigned long long l;
 };
 
 void printRecord(TraceRecord &record);

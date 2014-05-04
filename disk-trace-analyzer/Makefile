@@ -21,7 +21,7 @@ all: $(OBJS) $(TRG)
 	$(CXX) -o $@ $^
 
 run: $(TRG)
-	./analyzer -t cello -i /media/sf_cello99-traces/tesla.hpl.hp.com/opensource/cello99/ds-bzip2/cello99-write-trace.txt
+	./analyzer -t cello -i cello99-write-trace.txt
 
 $(OBJS): | $(OBJDIR)
 $(OBJDIR):

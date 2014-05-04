@@ -5,9 +5,14 @@
 #include "statistics.h"
 using namespace std;
 
+//#define DEBUG
+
 struct PageLog {
   double prev_t;
   unsigned long long w_cnt;
+#ifdef DEBUG
+  unsigned long long line_num;
+#endif
 };
 
 class Logger {
