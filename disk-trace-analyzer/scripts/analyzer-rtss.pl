@@ -14,7 +14,7 @@ my $block_start = 0; # start hour
 
 # Tracking retention time
 my $PAGE_SIZE = 512;
-my @last_write;
+my @last_write = (0) x ;
 
 # Statistics
 my @write_intervals = ();
@@ -78,6 +78,7 @@ foreach my $folder (@sorted_dates) {
           exit -1;
         }
         while ($size > 0) {
+          print $block;
           $last_write[$block] = $cur_hour;
           $size -= $PAGE_SIZE;
           $block += $PAGE_SIZE;
@@ -85,7 +86,12 @@ foreach my $folder (@sorted_dates) {
       } elsif ($type eq "F") {
         # Is Read
         while ($size > 0) {
-          my $retention = $cur_hour - $last_write[$block];
+          my $write_time = 0;
+          print $block;
+          if (defined($last_write[$block])) {
+            $write_time = $last_write[$block];
+          }
+          my $retention = $cur_hour - $write_time;
           print $retention;
           $size -= $PAGE_SIZE;
           $block += $PAGE_SIZE;
