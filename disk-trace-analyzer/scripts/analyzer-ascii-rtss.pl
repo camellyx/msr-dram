@@ -7,8 +7,8 @@ use Data::Dumper;
 # Constants for ascii
 my $READ = "0";
 my $WRITE= "1";
-my $BLOCK_SIZE = 256*8; # block size = 256 KB
-my $PAGE_SIZE = 8;
+my $BLOCK_SIZE = 256*8*1024; # block size = 256 * 8 KB = 2 MB
+my $PAGE_SIZE = 8 * 1024;
 
 my $file = $ARGV[0];
 
@@ -36,8 +36,8 @@ while (<FILE>) {
 
   # Get fields
   my $type = $fields[-1];
-  my $size = $fields[-2];
-  my $block = $fields[-3];
+  my $size = $fields[-2] * 512;
+  my $block = $fields[-3] * 512;
   $cur_hour = int($fields[0] / 3600);
   if ($size % $PAGE_SIZE != 0) {
     $size = $size - ($size % $PAGE_SIZE) + $PAGE_SIZE;
