@@ -15,7 +15,7 @@ if ($ARGV[1] eq "wri") {
     }
     my @fields = split(/['\ =>\ ,]+/, $line);
     if ($#fields >= 2) {
-      print "$fields[1], $fields[2]\n";
+      print "$fields[1],$fields[2]\n";
     }
   }
 } else {
@@ -32,7 +32,7 @@ if ($ARGV[1] eq "wri") {
     }
     my @fields = split(/['\ =>\ ,]+/, $line);
     if ($#fields >= 2) {
-      print "$fields[1], $fields[2]\n";
+      print "$fields[1],$fields[2]\n";
     }
   }
 }

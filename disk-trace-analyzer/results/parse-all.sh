@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
+mkdir -p write-interval retention
 for file in *.stdout
 do
-  echo "write_interval_in_hour, count" > ${file%.stdout}.csv
-  ../scripts/parse-hash.pl $file | sort -n -k 1 >> ${file%.stdout}.csv
+  echo "retention_in_hour,count" > retention/${file%.stdout}.csv
+  ../scripts/parse-hash.pl $file ret | sort -n -k 1 >> retention/${file%.stdout}.csv
+  echo "write_interval_in_hour,count" > write-interval/${file%.stdout}.csv
+  ../scripts/parse-hash.pl $file wri | sort -n -k 1 >> write-interval/${file%.stdout}.csv
 done

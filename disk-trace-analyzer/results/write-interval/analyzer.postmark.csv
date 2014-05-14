@@ -1,4 +1,4 @@
-write_interval_in_hour, count
-1, 2174
-2, 109
-6, 1
+write_interval_in_hour,count
+6,1
+2,109
+1,2174
