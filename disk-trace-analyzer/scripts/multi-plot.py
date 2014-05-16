@@ -52,6 +52,8 @@ for filename in files:
         fx = 0
         fy += 1
 
+axes[2,5].axis('off')
+
 #plt.yscale('log')
 #plt.legend()
 #sns.tsplot(gammas, "timepoint", "subject", "ROI", "BOLD signal")
