@@ -1,4 +1,8 @@
 write_interval_in_hour,count
+cur_hour:,0
+cur_hour:,136
+cur_hour:,168
 6,1
-2,109
-1,2174
+23,1
+2,140
+1,2689

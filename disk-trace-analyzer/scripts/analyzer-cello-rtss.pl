@@ -55,6 +55,9 @@ foreach my $folder (@sorted_dates) {
   my @sorted_hours = sort(@hours);
 
   foreach my $file (@sorted_hours) {
+    if ($cur_hour >= 24*7) { # stop until 1 week
+      last;
+    }
     $file = $folder.$file;
     print STDERR "@@ $file\n";
     open(FILE, $file) or die $!;
