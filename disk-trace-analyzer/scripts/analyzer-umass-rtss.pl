@@ -30,18 +30,21 @@ my $line_count = 0;
 
 for (my $i=0; $i <= $#ARGV; $i++) {
 
-  print "@@@@@@@@@ cur_hour: $cur_hour\n";
+  print "@@@@@@@@@ cur_hour: $cur_hour $cur_time $ftime_offset\n";
   if ($cur_hour >= 24*7) { # stop until 1 week
     last;
   }
 
   print STDERR "@@ $i\n";
   my $file = $ARGV[$i];
-  $ftime_offset = $cur_time;
+  $ftime_offset += $cur_time;
 
   print STDERR "@@ $file\n";
   open(FILE, $file) or die $!;
   while (<FILE>) {
+	  if ($cur_hour >= 24*7) { # stop until 1 week
+		  last;
+		}
     chomp;
     my $line = $_;
     #print STDERR "$line\n";
@@ -51,7 +54,7 @@ for (my $i=0; $i <= $#ARGV; $i++) {
     my $type = $fields[-2];
     my $size = $fields[-3];
     my $block = $fields[-4] * 512;
-    $cur_time = $fields[-1];
+    $cur_time = 1.0 * $fields[-1];
     $cur_hour = int(($cur_time + $ftime_offset) / 3600);
     #if ($line_count++ % 100000 == 0) {
     #		print STDERR "$line\n";
