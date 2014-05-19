@@ -29,15 +29,15 @@ my %write_intervals;
 my %retentions;
 
 while (1) {
-  print "@@@@@@@@@@ cur_hour: $cur_hour\n";
-  if ($cur_hour >= 24*7) { # stop until 1 week
+  print STDERR "@@@@@@@@@@ cur_hour: $cur_hour\n";
+  if ($cur_hour >= 24*30) { # stop until 1 week
     last;
   }
   $time_offset = $cur_hour;
   print STDERR "@@ $file\n";
   open(FILE, $file) or die $!;
   while (<FILE>) {
-    if ($cur_hour >= 24*7) { # stop until 1 week
+    if ($cur_hour >= 24*30) { # stop until 1 week
       last;
     }
     chomp;

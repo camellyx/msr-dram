@@ -41,8 +41,8 @@ my @sorted_dates = sort(@dates);
 
 # Loop through the array printing out the filenames
 foreach my $folder (@sorted_dates) {
-  print "@@@@@@@@@@ cur_hour: $cur_hour\n";
-  if ($cur_hour >= 24*7) { # stop until 1 week
+  print STDERR "@@@@@@@@@@ cur_hour: $cur_hour\n";
+  if ($cur_hour >= 24*30) { # stop until 1 week
     last;
   }
   $folder = $dir.$folder."/";
@@ -55,7 +55,7 @@ foreach my $folder (@sorted_dates) {
   my @sorted_hours = sort(@hours);
 
   foreach my $file (@sorted_hours) {
-    if ($cur_hour >= 24*7) { # stop until 1 week
+    if ($cur_hour >= 24*30) { # stop until 1 week
       last;
     }
     $file = $folder.$file;

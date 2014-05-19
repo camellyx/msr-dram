@@ -30,8 +30,8 @@ my $line_count = 0;
 
 for (my $i=0; $i <= $#ARGV; $i++) {
 
-  print "@@@@@@@@@ cur_hour: $cur_hour $cur_time $ftime_offset\n";
-  if ($cur_hour >= 24*7) { # stop until 1 week
+  print STDERR "@@@@@@@@@ cur_hour: $cur_hour $cur_time $ftime_offset\n";
+  if ($cur_hour >= 24*30) { # stop until 1 week
     last;
   }
 
@@ -42,7 +42,7 @@ for (my $i=0; $i <= $#ARGV; $i++) {
   print STDERR "@@ $file\n";
   open(FILE, $file) or die $!;
   while (<FILE>) {
-	  if ($cur_hour >= 24*7) { # stop until 1 week
+	  if ($cur_hour >= 24*30) { # stop until 1 week
 		  last;
 		}
     chomp;
