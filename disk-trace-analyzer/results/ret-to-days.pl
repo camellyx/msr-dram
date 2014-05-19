@@ -11,10 +11,10 @@ my @infiles
 
 closedir(DIR);
 
-my @converted = ([days,1,2,3,4,5,6,7]);
+my @converted = ([days,1..30]);
 
 foreach my $filename (@infiles) {
-  my @days = ($filename,0,0,0,0,0,0,0);
+  my @days = ($filename,(0)x30);
   $filename = $dir.$filename;
   #print "@@@ $filename\n";
   open(FILE, $filename) or die $!;
@@ -34,7 +34,7 @@ foreach my $filename (@infiles) {
 local $" = ', ';
 #print "@@@ $#converted\n";
 
-for (my $j=0; $j<=7; $j++) {
+for (my $j=0; $j<=30; $j++) {
   for (my $i=0; $i<=$#converted; $i++) {
     #print "@{$converted[$i]}\n";
     print "$converted[$i][$j], ";
