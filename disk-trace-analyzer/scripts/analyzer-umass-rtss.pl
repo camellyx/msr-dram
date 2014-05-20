@@ -42,9 +42,9 @@ for (my $i=0; $i <= $#ARGV; $i++) {
   print STDERR "@@ $file\n";
   open(FILE, $file) or die $!;
   while (<FILE>) {
-	  if ($cur_hour >= 24*30) { # stop until 1 week
-		  last;
-		}
+    if ($cur_hour >= 24*30) { # stop until 1 week
+      last;
+    }
     chomp;
     my $line = $_;
     #print STDERR "$line\n";
