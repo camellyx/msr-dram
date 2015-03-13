@@ -1,0 +1,1 @@
+scripts for running reliability tests for msr-dram project
